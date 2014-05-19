@@ -199,6 +199,7 @@ module Sidekiq
       raise ArgumentError, "#{options[:require]} does not exist" unless File.exist?(options[:require])
 
       if File.directory?(options[:require])
+        Dir.chdir(options[:require])
         require 'rails'
         require 'sidekiq/rails'
         require File.expand_path("#{options[:require]}/config/environment.rb")
